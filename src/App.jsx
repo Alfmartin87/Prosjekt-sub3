@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+ import { useState, useEffect } from "react";
 import Dashboard from "./components/Dashboard.jsx";
 import TrainingLog from "./components/TrainingLog.jsx";
 import Progress from "./components/Progress.jsx";
@@ -28,10 +28,10 @@ export default function App() {
   }
 
   const nav = [
-    { id: "dashboard", label: "DASHBOARD", icon: "‚¨°" },
-    { id: "log", label: "LOGG", icon: "‚óà" },
-    { id: "progress", label: "FREMGANG", icon: "‚óé" },
-    { id: "beetroot", label: "R√òDBETE", icon: "‚óâ" },
+    { id: "dashboard", label: "DASHBOARD", icon: "\u2B61" },
+    { id: "log", label: "LOGG", icon: "\u25C8" },
+    { id: "progress", label: "FREMGANG", icon: "\u25CE" },
+    { id: "beetroot", label: "R√òDBETE", icon: "\u25C9" },
   ];
 
   return (
@@ -40,7 +40,7 @@ export default function App() {
         <div className="header-inner">
           <div className="logo">
             <span className="logo-main">BERLIN</span>
-            <span className="logo-sub">SUB¬∑3¬∑00</span>
+            <span className="logo-sub">SUB\u00B73\u00B700</span>
           </div>
           <nav className="nav">
             {nav.map(n => (
