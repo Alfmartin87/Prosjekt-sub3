@@ -1,6 +1,6 @@
-import { BERLIN_DATE, BERGEN_FM_DATE } from "../data/trainingData";
+ import { BERLIN_DATE } from "../data/trainingData";
 
-const ACHILLES_LABELS = ["", "Smertefri", "Litt stiv morgen", "Stiv + merkbar", "Smerter under løp", "Måtte stoppe"];
+const ACHILLES_LABELS = ["", "Smertefri", "Litt stiv morgen", "Stiv + merkbar", "Smerter under lop", "Matte stoppe"];
 const ACHILLES_COLORS = ["", "#2ecc71", "#a3e635", "#facc15", "#fb923c", "#e74c3c"];
 
 function daysUntil(dateStr) {
@@ -11,13 +11,27 @@ function daysUntil(dateStr) {
 
 function weekAvg(weeks, n, getter) {
   const slice = weeks.slice(0, n).map(getter).filter(v => v > 0);
-  return slice.length ? (slice.reduce((a, b) => a + b, 0) / slice.length).toFixed(1) : "—";
+  return slice.length ? (slice.reduce((a, b) => a + b, 0) / slice.length).toFixed(1) : "-";
 }
+
+function getISOWeek(dateStr) {
+  const date = new Date(dateStr);
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+}
+
+const ITALIA_START = "2026-06-25";
+const ITALIA_END = "2026-07-17";
 
 export default function Dashboard({ weeks, setPage }) {
   const latest = weeks[0];
   const dBerlin = daysUntil(BERLIN_DATE);
-  const dBergen = daysUntil(BERGEN_FM_DATE);
+  const dItalia = daysUntil(ITALIA_START);
+  const dItaliaEnd = daysUntil(ITALIA_END);
+  const inItalia = dItalia <= 0 && dItaliaEnd > 0;
 
   const avg4km = weekAvg(weeks, 4, w => Number(w.totalKm) || 0);
   const avg4tss = weekAvg(weeks, 4, w => Number(w.tss) || 0);
@@ -25,16 +39,14 @@ export default function Dashboard({ weeks, setPage }) {
   const avg4watt = weekAvg(weeks, 4, w => Number(w.stryd?.avgPower) || 0);
 
   const achillesColor = latest ? ACHILLES_COLORS[latest.achilles] : "#2ecc71";
-  const achillesLabel = latest ? ACHILLES_LABELS[latest.achilles] : "—";
+  const achillesLabel = latest ? ACHILLES_LABELS[latest.achilles] : "-";
 
-  // Trend: last week vs week before
   const trendKm = weeks.length >= 2
     ? ((Number(weeks[0].totalKm) - Number(weeks[1].totalKm)) / Number(weeks[1].totalKm) * 100).toFixed(0)
     : null;
 
   return (
     <div>
-      {/* Countdown row */}
       <div className="grid-2" style={{ marginBottom: 16 }}>
         <div className="card" style={{ borderColor: "var(--blue-dim)", position: "relative", overflow: "hidden" }}>
           <div style={{ position: "absolute", top: 0, right: 0, width: 120, height: 120, background: "radial-gradient(circle at top right, #3d6fff12, transparent 70%)", pointerEvents: "none" }} />
@@ -43,7 +55,7 @@ export default function Dashboard({ weeks, setPage }) {
             <span style={{ fontFamily: "'Barlow Condensed'", fontSize: 72, fontWeight: 800, color: "var(--blue)", lineHeight: 1 }}>{dBerlin}</span>
             <span style={{ fontSize: 14, color: "var(--text2)" }}>dager</span>
           </div>
-          <div style={{ fontSize: 11, color: "var(--text3)", marginTop: 6, letterSpacing: "0.1em" }}>27. SEPTEMBER 2026 · MÅL 2:59:59</div>
+          <div style={{ fontSize: 11, color: "var(--text3)", marginTop: 6, letterSpacing: "0.1em" }}>27. SEPTEMBER 2026 - MAL 2:59:59</div>
           <div style={{ marginTop: 16 }}>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
               <span style={{ fontSize: 10, color: "var(--text3)" }}>FREMGANG</span>
@@ -55,28 +67,31 @@ export default function Dashboard({ weeks, setPage }) {
           </div>
         </div>
 
-        <div className="card" style={{ borderColor: "#2ecc7122" }}>
-          <div className="section-label">Bergen Fjellmaraton</div>
+        <div className="card" style={{ borderColor: "#f5a62322" }}>
+          <div className="section-label">Italia Hoydeleir</div>
           <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-            <span style={{ fontFamily: "'Barlow Condensed'", fontSize: 72, fontWeight: 800, color: "var(--green)", lineHeight: 1 }}>{dBergen}</span>
+            <span style={{ fontFamily: "'Barlow Condensed'", fontSize: 72, fontWeight: 800, color: "var(--amber)", lineHeight: 1 }}>
+              {inItalia ? dItaliaEnd : Math.max(dItalia, 0)}
+            </span>
             <span style={{ fontSize: 14, color: "var(--text2)" }}>dager</span>
           </div>
-          <div style={{ fontSize: 11, color: "var(--text3)", marginTop: 6, letterSpacing: "0.1em" }}>29. AUGUST 2026 · AVVENTER FYSIO</div>
+          <div style={{ fontSize: 11, color: "var(--text3)", marginTop: 6, letterSpacing: "0.1em" }}>
+            {inItalia ? "PA LEIR - SESTO 1900 MOH" : "25. JUNI - 17. JULI 2026 - SESTO"}
+          </div>
           <div style={{ marginTop: 16 }}>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
-              <span style={{ fontSize: 10, color: "var(--text3)" }}>RØDBETEPROTOKOLL</span>
-              <span style={{ fontSize: 10, color: "var(--amber)" }}>START {Math.max(dBergen - 6, 0)} DAGER FØR</span>
+              <span style={{ fontSize: 10, color: "var(--text3)" }}>FASE 2</span>
+              <span style={{ fontSize: 10, color: "var(--amber)" }}>{inItalia ? "AKTIV LEIR" : "GRUNNFASE PAGAING"}</span>
             </div>
             <div className="bar-track">
-              <div className="bar-fill" style={{ width: `${Math.min(Math.round((1 - dBergen / 120) * 100), 100)}%`, background: "var(--green)" }} />
+              <div className="bar-fill" style={{ width: `${inItalia ? Math.round((1 - dItaliaEnd / 22) * 100) : 0}%`, background: "var(--amber)" }} />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Key metrics */}
       <div className="card" style={{ marginBottom: 16 }}>
-        <div className="section-label">Siste 4 uker – snitt</div>
+        <div className="section-label">Siste 4 uker - snitt</div>
         <div className="grid-4">
           {[
             { label: "KM / UKE", value: avg4km, unit: "km", color: "var(--blue)" },
@@ -94,13 +109,15 @@ export default function Dashboard({ weeks, setPage }) {
         </div>
       </div>
 
-      {/* Latest week + akilles */}
       {latest && (
         <div className="grid-2" style={{ marginBottom: 16 }}>
           <div className="card">
             <div className="section-label">Siste loggede uke</div>
-            <div style={{ fontSize: 13, color: "var(--text2)", marginBottom: 12 }}>
-              {new Date(latest.weekStart).toLocaleDateString("nb-NO", { day: "numeric", month: "long", year: "numeric" })}
+            <div style={{ fontSize: 16, fontFamily: "'Barlow Condensed'", fontWeight: 700, color: "var(--text)", marginBottom: 4 }}>
+              {latest.weekStart ? `UKE ${getISOWeek(latest.weekStart)}` : "-"}
+            </div>
+            <div style={{ fontSize: 11, color: "var(--text3)", marginBottom: 12 }}>
+              {latest.weekStart ? new Date(latest.weekStart).toLocaleDateString("nb-NO", { day: "numeric", month: "long", year: "numeric" }) : ""}
             </div>
             <div style={{ display: "flex", gap: 20, marginBottom: 14, flexWrap: "wrap" }}>
               {[
@@ -117,19 +134,19 @@ export default function Dashboard({ weeks, setPage }) {
             </div>
             {latest.keyWorkout && (
               <div style={{ fontSize: 11, color: "var(--text3)", borderTop: "1px solid var(--border)", paddingTop: 10 }}>
-                ◈ {latest.keyWorkout}
+                * {latest.keyWorkout}
               </div>
             )}
             {trendKm && (
               <div style={{ marginTop: 8, fontSize: 11, color: Number(trendKm) >= 0 ? "var(--green)" : "var(--amber)" }}>
-                {Number(trendKm) >= 0 ? "↑" : "↓"} {Math.abs(trendKm)}% vs forrige uke
+                {Number(trendKm) >= 0 ? "+" : ""}{trendKm}% vs forrige uke
               </div>
             )}
           </div>
 
           <div className="card">
             <div className="section-label">Akilles-status</div>
-            <div style={{ display: "flex", align: "center", gap: 12, marginBottom: 16 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
               <div style={{ width: 12, height: 12, borderRadius: "50%", background: achillesColor, marginTop: 2, flexShrink: 0, boxShadow: `0 0 12px ${achillesColor}88` }} />
               <div>
                 <div style={{ fontFamily: "'Barlow Condensed'", fontSize: 22, fontWeight: 700, color: achillesColor }}>{achillesLabel}</div>
@@ -141,7 +158,7 @@ export default function Dashboard({ weeks, setPage }) {
             {weeks.slice(0, 8).map((w, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 5 }}>
                 <div style={{ fontSize: 9, color: "var(--text3)", minWidth: 40 }}>
-                  {w.weekStart ? new Date(w.weekStart).toLocaleDateString("nb-NO", { day: "numeric", month: "numeric" }) : "—"}
+                  {w.weekStart ? new Date(w.weekStart).toLocaleDateString("nb-NO", { day: "numeric", month: "numeric" }) : "-"}
                 </div>
                 <div className="bar-track" style={{ flex: 1 }}>
                   <div className="bar-fill" style={{ width: `${(Number(w.achilles) / 5) * 100}%`, background: ACHILLES_COLORS[w.achilles] }} />
@@ -153,19 +170,18 @@ export default function Dashboard({ weeks, setPage }) {
         </div>
       )}
 
-      {/* Sub-3 targets */}
       <div className="card" style={{ borderColor: "var(--blue-dim)" }}>
         <div className="section-label">Sub-3 referanseverdier</div>
         <div className="grid-4">
           {[
-            { label: "MÅLPACE", value: "4:16", unit: "/km" },
+            { label: "MALPACE", value: "4:16", unit: "/km" },
             { label: "OBLA FART", value: "14,5", unit: "km/t" },
             { label: "OBLA PULS", value: "174", unit: "bpm" },
-            { label: "UKESVOLUM", value: "70–85", unit: "km" },
-            { label: "LANGTUR PACE", value: "4:30–50", unit: "/km" },
-            { label: "LANGTUR WATT", value: "250–270", unit: "W" },
-            { label: "TSS / UKE", value: "400–520", unit: "" },
-            { label: "EASY %", value: "≥80", unit: "%" },
+            { label: "UKESVOLUM", value: "70-85", unit: "km" },
+            { label: "LANGTUR PACE", value: "4:30-50", unit: "/km" },
+            { label: "LANGTUR WATT", value: "250-270", unit: "W" },
+            { label: "TSS / UKE", value: "400-520", unit: "" },
+            { label: "EASY %", value: "80+", unit: "%" },
           ].map(({ label, value, unit }) => (
             <div key={label} className="card-sm" style={{ marginBottom: 0 }}>
               <div className="stat-label">{label}</div>
@@ -179,3 +195,4 @@ export default function Dashboard({ weeks, setPage }) {
     </div>
   );
 }
+
