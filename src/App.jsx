@@ -28,10 +28,10 @@ export default function App() {
   }
 
   const nav = [
-    { id: "dashboard", label: "DASHBOARD", icon: "⬡" },
-    { id: "log", label: "LOGG", icon: "◈" },
-    { id: "progress", label: "FREMGANG", icon: "◎" },
-    { id: "beetroot", label: "RØDBETE", icon: "◉" },
+    { id: "dashboard", label: "DASHBOARD", icon: "‚¨°" },
+    { id: "log", label: "LOGG", icon: "‚óà" },
+    { id: "progress", label: "FREMGANG", icon: "‚óé" },
+    { id: "beetroot", label: "R√òDBETE", icon: "‚óâ" },
   ];
 
   return (
@@ -40,7 +40,7 @@ export default function App() {
         <div className="header-inner">
           <div className="logo">
             <span className="logo-main">BERLIN</span>
-            <span className="logo-sub">SUB·3·00</span>
+            <span className="logo-sub">SUB¬∑3¬∑00</span>
           </div>
           <nav className="nav">
             {nav.map(n => (
@@ -56,15 +56,12 @@ export default function App() {
           </nav>
         </div>
       </header>
-
       <main className="main">
         {page === "dashboard" && <Dashboard weeks={weeks} setPage={setPage} />}
         {page === "log" && <TrainingLog weeks={weeks} saveWeeks={saveWeeks} />}
         {page === "progress" && <Progress weeks={weeks} />}
         {page === "beetroot" && <BeetrootProtocol />}
       </main>
-
-      {/* Mobile bottom nav */}
       <nav className="bottom-nav">
         {nav.map(n => (
           <button
@@ -80,3 +77,4 @@ export default function App() {
     </div>
   );
 }
+
