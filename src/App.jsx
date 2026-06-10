@@ -28,10 +28,10 @@ export default function App() {
   }
 
   const nav = [
-    { id: "dashboard", label: "DASHBOARD", icon: "\u2B61" },
-    { id: "log", label: "LOGG", icon: "\u25C8" },
-    { id: "progress", label: "FREMGANG", icon: "\u25CE" },
-    { id: "beetroot", label: "R√òDBETE", icon: "\u25C9" },
+    { id: "dashboard", label: "DASHBOARD", icon: "#" },
+    { id: "log", label: "LOGG", icon: "+" },
+    { id: "progress", label: "FREMGANG", icon: "~" },
+    { id: "beetroot", label: "RODBETE", icon: "@" },
   ];
 
   return (
@@ -40,7 +40,7 @@ export default function App() {
         <div className="header-inner">
           <div className="logo">
             <span className="logo-main">BERLIN</span>
-            <span className="logo-sub">SUB\u00B73\u00B700</span>
+            <span className="logo-sub">SUB-3-00</span>
           </div>
           <nav className="nav">
             {nav.map(n => (
