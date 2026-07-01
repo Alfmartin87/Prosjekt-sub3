@@ -1,4 +1,4 @@
- import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Dashboard from "./components/Dashboard.jsx";
 import TrainingLog from "./components/TrainingLog.jsx";
 import Progress from "./components/Progress.jsx";
@@ -14,12 +14,28 @@ export default function App() {
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      if (parsed.length > 0) { setWeeks(parsed); return; }
-    }
-    setWeeks(SEED_WEEKS);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(SEED_WEEKS));
+    const storedWeeks = stored ? JSON.parse(stored) : [];
+
+    // Merge: start with SEED_WEEKS, then overlay any manually edited weeks from localStorage
+    // localStorage weeks that match a weekStart in SEED_WEEKS take priority (user edits win)
+    // localStorage weeks NOT in SEED_WEEKS are also kept (manually added weeks)
+    const seedMap = new Map(SEED_WEEKS.map(w => [w.weekStart, w]));
+    const storedMap = new Map(storedWeeks.map(w => [w.weekStart, w]));
+
+    // Union of all weekStarts
+    const allKeys = new Set([...seedMap.keys(), ...storedMap.keys()]);
+
+    const merged = Array.from(allKeys).map(key => {
+      // If user has manually edited this week in localStorage, use that version
+      // Otherwise use SEED_WEEKS version
+      return storedMap.get(key) || seedMap.get(key);
+    });
+
+    // Sort newest first
+    merged.sort((a, b) => new Date(b.weekStart) - new Date(a.weekStart));
+
+    setWeeks(merged);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
   }, []);
 
   function saveWeeks(updated) {
