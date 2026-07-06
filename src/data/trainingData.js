@@ -1,11 +1,19 @@
-// Treningsanalyse-instrukser (fast):
-// Fokus pÃ¥ langsiktig progresjon mot sub-3 Berlin. Ta hensyn til akilleshistorikk selv om den er under kontroll.
-// Prioriter kontinuitet og skadeforebygging. Planlegg i 1-2 ukers horisonter.
-// Vaer kritisk og realistisk - pek tydelig paa risiko, inkonsistens og for hÃ¸y mekanisk belastning.
-// Ikke foreslaa hero-Ã¸kter. Flatt og maratonrelevant arbeid prioriteres over terreng.
-// Bergen Fjellmarathon er sekundaert. Ingen motivasjonsprat. Forklar alltid hvorfor et raad gis.
-
 export const SEED_WEEKS = [
+  {
+    weekStart: "2026-06-29",
+    totalKm: "32.6",
+    longRunKm: "10.2",
+    longRunPace: "9:30",
+    tss: "219",
+    intensityDistribution: { easy: "95", hard: "5" },
+    achilles: "1",
+    feeling: "4",
+    comments: "Sesto 1900 moh, uke 1 av hoeydeleir. Morgenloep + gaaing daglig. Tre Cime 30. juni (10.7km, HR 88/140). Loerdag 1. juli: 10.2km terrengloep 239hm ned, HR 126/152, 179W. Zsigmondy VF 3. juli. HRV stiger fraa 62 til 84 i loepet av uken â€“ rask akklimatisering. Soevn 7.9t snitt, beste soevnuke siden mai. Daglig badstue 30-60 min stoetter akklimatisering.",
+    keyWorkout: "10.2km terrengloep 239hm ned HR 126/152 (1. juli) + Tre Cime (30. juni)",
+    stryd: { cp: "309", avgPower: "179", formPower: "", legStiffness: "" },
+    hrv: "76.1",
+    sleepHours: "7.9",
+  },
   {
     weekStart: "2026-06-22",
     totalKm: "50.9",
@@ -15,11 +23,11 @@ export const SEED_WEEKS = [
     intensityDistribution: { easy: "90", hard: "10" },
     achilles: "1",
     feeling: "3",
-    comments: "Italia-avreiseuke. Mandag-tirsdag i Kristiansand (varmt, 30+ grader). Avreise til Italia 25. juni, sen ankomst Venezia (ikke i seng foer kl. 02). Venezia: heteboelge, brosteinsbroer, ikke loepevennlig terreng. Reiste til Sesto 28. juni â€“ morgenloep i Venezia + gaatur i fjellet Sesto same kveld. Sesto 1900 moh. Watt-fall til 191-223W er normal hÃ¸yderespons kombinert med akkumulert reisebelastning.",
+    comments: "Italia-avreiseuke. Mandag-tirsdag i Kristiansand (varmt, 30+ grader). Avreise til Italia 25. juni, sen ankomst Venezia (ikke i seng foer kl. 02). Venezia: heteboelge, brosteinsbroer, ikke loepevennlig terreng. Reiste til Sesto 28. juni. Watt-fall til 191-223W er normal hoeyderespons kombinert med akkumulert reisebelastning. HRV falt til 58 i Venezia (akkumulert stress) og steg til 65 ved Sesto-ankomst.",
     keyWorkout: "12.1km @ 5:54 HR 143/159 (Venezia, 27. juni)",
     stryd: { cp: "309", avgPower: "221", formPower: "", legStiffness: "" },
-    hrv: "",
-    sleepHours: "",
+    hrv: "70.0",
+    sleepHours: "6.3",
   },
   {
     weekStart: "2026-06-15",
@@ -30,11 +38,11 @@ export const SEED_WEEKS = [
     intensityDistribution: { easy: "82", hard: "18" },
     achilles: "1",
     feeling: "3",
-    comments: "Fotballcup Kristiansand med junior 19-24 juni. Lang kjoeretur fredag etter jobb, fulle dager, begrenset soevn, 30+ grader og sol. HR paa loerdag (149/164) forhÃ¸yet av varme â€“ ikke reell intensitetsÃ¸kning. Onsdag 24. juni: lang biltur hjem + pakking/vasking foer Italia-avreise.",
+    comments: "Fotballcup Kristiansand med junior 19-24 juni. Lang kjoeretur fredag etter jobb, fulle dager, begrenset soevn, 30+ grader og sol. HR paa loerdag (149/164) forhoyet av varme â€“ ikke reell intensitetsokning. Onsdag 24. juni: lang biltur hjem + pakking/vasking foer Italia-avreise. HRV hoey (83-91) tidlig i uken, fell mot slutten.",
     keyWorkout: "14.1km @ 5:26 HR 143/158 (torsdag 18. juni)",
     stryd: { cp: "309", avgPower: "258", formPower: "", legStiffness: "" },
-    hrv: "",
-    sleepHours: "",
+    hrv: "83.0",
+    sleepHours: "6.0",
   },
   {
     weekStart: "2026-06-08",
@@ -45,11 +53,11 @@ export const SEED_WEEKS = [
     intensityDistribution: { easy: "72", hard: "28" },
     achilles: "1",
     feeling: "4",
-    comments: "Eksamen tirsdag 9. juni + tungt hagearbeid (myrgraving, toemrere skulle legge platting). Tre lette oekter foer progressiv langtur loerdag. Langturen (277W snitt, 307W siste 10 min, HR 158/176, NP 279W) er beste maratonspesifikke oekt siden uke 22. Motvind siste blokk (Air Power max 21%) bidro til HR-drift mot 176 â€“ ikke alarm.",
+    comments: "Eksamen tirsdag 9. juni + tungt hagearbeid (myrgraving, toemrere skulle legge platting). Tre lette oekter foer progressiv langtur loerdag. Langturen (277W snitt, 307W siste 10 min, HR 158/176, NP 279W) er beste maratonspesifikke oekt i perioden. Motvind siste blokk (Air Power max 21%) bidro til HR-drift mot 176 â€“ ikke alarm. HRV 84 dagen etter langturen bekrefter riktig intensitetsnivaa.",
     keyWorkout: "Progressiv langtur 18.2km @ 4:53 HR 158/176 â€“ 30min@250W, 40min@284W, 10min@307W",
     stryd: { cp: "309", avgPower: "252", formPower: "", legStiffness: "" },
-    hrv: "",
-    sleepHours: "",
+    hrv: "74.1",
+    sleepHours: "7.1",
   },
   {
     weekStart: "2026-06-01",
@@ -60,11 +68,11 @@ export const SEED_WEEKS = [
     intensityDistribution: { easy: "65", hard: "35" },
     achilles: "1",
     feeling: "3",
-    comments: "Bergen Fjellmarathon torsdag 4. juni (21.2km, 202W, HR 157/169, TSS 134, 944 hm). Eksamen tirsdag og myrgraving i hagen. Soendag 7. juni: 12.6km 252W HR 154/173 â€“ for hard to dager etter fjellmarathon, lite restitusjonseffekt. Ukens hÃ¸yeste TSS (358) i perioden. Fjellmarathon er sekundaert maal og paavirktet ukesstrukturen negativt.",
+    comments: "Bergen Fjellmarathon torsdag 4. juni (21.2km, 202W, HR 157/169, TSS 134, 944 hm). Eksamen tirsdag og myrgraving i hagen. Soendag 7. juni: 12.6km 252W HR 154/173 â€“ for hard to dager etter fjellmarathon. Ukens hoeyeste TSS (358). HRV falt til 61 dagen etter fjellmarathon, normalt. Soevn 6.5t â€“ for lavt ift belastning.",
     keyWorkout: "Bergen Fjellmarathon 21.2km HR 157/169 (terreng, ikke maratonspesifikt)",
     stryd: { cp: "309", avgPower: "240", formPower: "", legStiffness: "" },
-    hrv: "",
-    sleepHours: "",
+    hrv: "72.3",
+    sleepHours: "6.5",
   },
   {
     weekStart: "2026-05-25",
