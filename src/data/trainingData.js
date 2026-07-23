@@ -1,6 +1,21 @@
 export const SEED_WEEKS = [
   {
-    weekStart: "2026-07-05",
+    weekStart: "2026-07-13",
+    totalKm: "84.6",
+    longRunKm: "11.6",
+    longRunPace: "36:38",
+    tss: "378.4",
+    intensityDistribution: { easy: "95", hard: "5" },
+    achilles: "1",
+    feeling: "4",
+    comments: "Siste dager Alta Badia + hjemreise + retur Bergen. Mandag 13. juli: fjelltur 10.5km 826/830hm HR 100/143. Tirsdag 14. juli: rolig gaatur morgen 5.1km 529/542hm HR 91/139, etterfulgt av trail run ettermiddag 12.3km HR 134/161 243W. Onsdag 15. juli: VF Averau/Cinque Torri 11.6km 7:04t +1295/-1309hm HR 108/152 - ukens store dag, etterfulgt av trail run 12.2km HR 131/150 237W samme ettermiddag. Torsdag 16. juli kveld: kort flatt loep 5.3km foer avreise, HR 142/152 238W. Fredag 17. juli: hjemreisedag, ingen trening. Loerdag 18. juli: foerste oekt tilbake i Bergen, 14.5km HR 140/161 251W (korrigert for 73kg Stryd-kalibrering), noe lengre enn planlagt pga rutefeil, avsluttet med motbakkedrag. Soendag 19. juli: 13.1km HR 132/155 248W, samme oekt-struktur, 4 stigningsloep i motbakke med gange ned. HRV 75-91 gjennom uken (snitt 83), hvilepuls 40-43, soevn 7.8-8.9t (snitt 8.3t) - stabile markorer uten tegn til overbelastning til tross for tunge dobbeltoekt-dager 14. og 15. juli.",
+    keyWorkout: "VF Averau/Cinque Torri 11.6km 7:04t +1295/-1309hm HR 108/152 (15. juli)",
+    stryd: { cp: "309", avgPower: "243", formPower: "79", legStiffness: "12.9" },
+    hrv: "83.1",
+    sleepHours: "8.3",
+  },
+  {
+    weekStart: "2026-07-06",
     totalKm: "55.6",
     longRunKm: "13.7",
     longRunPace: "11:22",
@@ -167,4 +182,4 @@ export const SEED_WEEKS = [
 ];
 
 export const BERLIN_DATE = "2026-09-27";
-export const BERGEN_FM_DATE = "2026-08-29";
+export const BERGEN_FM_DATE = "2026-06-04";
