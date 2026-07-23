@@ -1,8 +1,8 @@
- import { useState } from "react";
+import { useState } from "react";
 
-const ACHILLES_LABELS = ["", "Smertefri", "Litt stiv morgen", "Stiv + merkbar", "Smerter under l√∏p", "M√•tte stoppe"];
+const ACHILLES_LABELS = ["", "Smertefri", "Litt stiv morgen", "Stiv + merkbar", "Smerter under loep", "Maatte stoppe"];
 const ACHILLES_COLORS = ["", "#2ecc71", "#a3e635", "#facc15", "#fb923c", "#e74c3c"];
-const FEELING_LABELS = ["", "Veldig d√•rlig", "D√•rlig", "N√∏ytral", "Bra", "Veldig bra"];
+const FEELING_LABELS = ["", "Veldig daarlig", "Daarlig", "Noeytral", "Bra", "Veldig bra"];
 
 const EMPTY = {
   weekStart: "", totalKm: "", longRunKm: "", longRunPace: "", tss: "",
@@ -90,7 +90,7 @@ export default function TrainingLog({ weeks, saveWeeks }) {
 
           <div className="grid-2" style={{ marginBottom: 20 }}>
             <div><label>Uke starter</label><input type="date" value={form.weekStart} onChange={e => hc("weekStart", e.target.value)} /></div>
-            <div><label>Nokkelok—Ç</label><input placeholder="f.eks. 2x20 min IntEnd" value={form.keyWorkout} onChange={e => hc("keyWorkout", e.target.value)} /></div>
+            <div><label>Nokkelokt</label><input placeholder="f.eks. 2x20 min IntEnd" value={form.keyWorkout} onChange={e => hc("keyWorkout", e.target.value)} /></div>
           </div>
 
           <div className="section-label">Volum og tempo</div>
